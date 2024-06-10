@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Question...</title>
+</head>
+<body>
+    <h1>You been here before?</h1>
+    <a href="yes.html"><button>Yes</button></a>
+    <a href="no.html"><button>NO</button></a>
+<script>
+    function getCookieName(cname){
+        var name = cname
+        var splitCookies = decodeURIComponent(document.cookie).split(';')
+        for (i = 0; i <splitCookies.length;i++){
+            let cookie = splitCookies[i]
+            cookie = cookie.split('=')
+            if (cookie[0] == cname){
+                return cookie[0];
+            }
+        }
+    }
+    fetch('/view', {
+        method: 'POST',
+        headers:{
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(document.cookie)
+    }).then((res) => res.json())
+    function getCookieValue(cname){
+        var name = cname
+        var splitCookies = decodeURIComponent(document.cookie).split(';')
+        for (i = 0; i <splitCookies.length;i++){
+            let cookie = splitCookies[i]
+            cookie = cookie.split('=')
+            if (cookie [0] == cname){
+                return cookie[1];
+            }
+        }
+    }
+
+    if (getCookieName('views')){
+        console.log("found!")
+    }else {
+        console.log("not there!")
+    }
+</script>
+</body>
+</html>
